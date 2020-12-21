@@ -19,11 +19,19 @@ In addition, we observe that microblog data such as Twitter data, once formatted
 
 # References
 Blei, David M., Andrew Y. Ng, and Michael I. Jordan. "Latent dirichlet allocation." Journal of machine Learning research 3.Jan (2003): 993-1022.
+
 Dhillon, Inderjit S. "Co-clustering documents and words using bipartite spectral graph partitioning." Proceedings of the seventh ACM SIGKDD international conference on Knowledge discovery and data mining. 2001.
+
 Dhillon, Inderjit S., Subramanyam Mallela, and Dharmendra S. Modha. "Information-theoretic co-clustering." Proceedings of the ninth ACM SIGKDD international conference on Knowledge discovery and data mining. 2003.
+
 Iovleff, S., et al. "blockcluster: Coclustering Package for Binary, Categorical, Contingency and Continuous Data-Sets." R package version 4.2 (2015).
+
 Role, François, Stanislas Morbieu, and Mohamed Nadif. "Coclust: a python package for co-clustering." (2018).
+
 Banerjee, Arindam, et al. "A generalized maximum entropy approach to bregman co-clustering and matrix approximation." Journal of Machine Learning Research 8.Aug (2007): 1919-1986.
+
 Salah, Aghiles, and Mohamed Nadif. "Model-based von Mises-Fisher Co-clustering with a Conscience." Proceedings of the 2017 SIAM International Conference on Data Mining. Society for Industrial and Applied Mathematics, 2017.
+
 Levine, Jacob H., et al. "Data-driven phenotypic dissection of AML reveals progenitor-like cells that correlate with prognosis." Cell 162.1 (2015): 184-197.
+
 Ferg, Robyn. Modern Survey Estimation with Social Media and Auxiliary Data. Diss. 2020.
