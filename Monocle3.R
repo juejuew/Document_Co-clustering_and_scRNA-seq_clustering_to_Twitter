@@ -1,8 +1,8 @@
-###############################################
-###############################################
-################## Monocle3 ###################
-############################################### 
-############################################### 
+################################################################################
+################################################################################
+################## Monocle3 (Tweets from four distinct users)###################
+################################################################################
+################################################################################
 
 setwd("C:/Users/jueju/Desktop/LDA and Co-clustering algorithms with data")
 getwd()
@@ -12,34 +12,39 @@ library(monocle3)
 library(cluster)
 
 ####### expression ########
-sparse_matrix <- read.csv("test_new_stem.csv", header = FALSE)
-sparse_matrix = as.matrix(sparse_matrix)
-sparse_matrix = t(sparse_matrix)
+sparse_matrix = read.csv("doc_word_matrix_stemmingf.csv") %>% dplyr::select(-X)
+names = names(sparse_matrix)
+sparse_matrix = t(as.matrix(sparse_matrix))
 word_expression = sparse_matrix
+
 dim(word_expression)
+word_expression[1:5, 1:5]
 
 ####### Doc_metadata
-doc_metadata <- read.csv("df_doc_topic_new_stemming.csv")
+doc_metadata = read.csv("df_doc_topic_new_stemming.csv")
+doc_metadata = doc_metadata  %>% dplyr::select(Keywords, Doc_Text, screen_name, user_id_new)
 dim(doc_metadata)
-str(doc_metadata)
-doc_metadata  = doc_metadata  %>% select(Keywords, Doc_Text, screen_name, user_id_new)
-dim(doc_metadata)
+head(doc_metadata)
 
 ####### Word_metadata
-word_metadata <- read.csv("word_metadata_new.csv")
-word_metadata = word_metadata %>% select(word) %>% mutate(gene_short_name = word)
-str(word_metadata)
+word_metadata = data.frame(
+  word = names,
+  gene_short_name = names
+)
+
 dim(word_metadata)
+head(word_metadata)
 
 ######## Change row_col names#######
-rownames(word_expression) <- rownames(word_metadata)
-colnames(word_expression) <- rownames(doc_metadata)
+colnames(word_expression) = rownames(doc_metadata)
+rownames(word_metadata) = rownames(word_expression)
 
-######## Pre-process ##########
-cds <- new_cell_data_set(expression_data = word_expression,
+######## Create Monocle3 Object ##########
+cds = new_cell_data_set(expression_data = word_expression,
                          cell_metadata = doc_metadata,
                          gene_metadata = word_metadata)
 
+######## Pre-process ##########
 cds <- preprocess_cds(cds, num_dim = 100)
 cds <- reduce_dimension(cds)
 
@@ -64,8 +69,18 @@ PCA %>% ggplot(aes(x = PCA_components, y = Monocle3)) + geom_point() +
 #################################################
 ############# Silhouette Analysis ###############
 #################################################
+
+
+############ Distance matrix ############## 
+
+# (1) Choice 1: Ferg's distance matrix
 distance_matrix <- read.csv("Robyn_tweets_distance.csv", header = FALSE)
 
+# (2) Choice 2: Euclidean distance matrix
+reduced_dim_res <- reducedDims(cds)[["UMAP"]]
+distance_matrix = dist(reduced_dim_res, diag = T, upper = T)
+
+# iterations
 k_range  =c(5,10,20,30,40,50,60,70,80,90,100,110,120,140,160,180,200,220,240,260,280)
 avg_widths = vector()
 
@@ -96,23 +111,15 @@ ggplot(data=omg, aes(x=k_range, y=avg_widths)) +
 
 cds = cluster_cells(cds,  k = 65)
 
-# UMAP
-plot_cells(cds)
-plot_cells(cds, color_cells_by="screen_name")
+### UMAP ###
 
-# Marker words by each cluster
-marker_test_res <- top_markers(cds, 
-                               reference_cells=1000, cores=8)
+# Clustering results
+plot_cells(cds, group_label_size = 5)
 
-top_specific_markers <- marker_test_res %>%
-  filter(fraction_expressing >= 0.10) %>%
-  group_by(cell_group) %>%
-  top_n(5, pseudo_R2)
+# True labels
+plot_cells(cds, color_cells_by="screen_name", group_label_size = 5, label_groups_by_cluster = FALSE)
 
-top_specific_marker_ids <- unique(top_specific_markers %>% pull(gene_id))
+### Feature plot ###
+plot_cells(cds, genes=c("storm", "health", "goblu", "vegan"))
 
-plot_genes_by_group(cds,
-                    top_specific_marker_ids,
-                    #group_cells_by="partition",
-                    ordering_type="cluster_row_col",
-                    max.size=5)
+
