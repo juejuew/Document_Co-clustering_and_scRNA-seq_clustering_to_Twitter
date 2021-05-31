@@ -1,6 +1,6 @@
 # Document_Co-clustering_and_scRNA-seq_Clustering_to_Twitter
 
-1. \bf{LDA and document_co-clustering}: Traditional topic modeling schemes including Latent Dirichlet allocation (LDA) and Latent Semantic
+1. \mathbf{LDA and document_co-clustering}: Traditional topic modeling schemes including Latent Dirichlet allocation (LDA) and Latent Semantic
 Analysis (LSA) have been widely adopted in the social sciences, but are typically unable to
 cope well with short and noisy texts. Several document co-clustering algorithms have been proposed
 as potential solutions, but their performances have seldom been compared systematically. Therefore,
