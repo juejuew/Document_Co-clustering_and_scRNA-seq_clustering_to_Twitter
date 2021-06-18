@@ -75,10 +75,10 @@ PCA %>% ggplot(aes(x = PCA_components, y = Monocle3)) + geom_point() +
 ############ Distance matrix ############## 
 
 # (1) Choice 1: Ferg's distance matrix
-distance_matrix <- read.csv("Robyn_tweets_distance.csv", header = FALSE)
+distance_matrix = read.csv("Robyn_tweets_distance.csv", header = FALSE)
 
 # (2) Choice 2: Euclidean distance matrix
-reduced_dim_res <- reducedDims(cds)[["UMAP"]]
+reduced_dim_res = reducedDims(cds)[["UMAP"]]
 distance_matrix = dist(reduced_dim_res, diag = T, upper = T)
 
 ############ iterations ############
@@ -91,7 +91,7 @@ for (i in 1:length(k_range)){
   cds = cluster_cells(cds,  k = num)
   x = cds@clusters@listData$UMAP$cluster_result$optim_res$membership
   si = silhouette(x, distance_matrix)
-  ssi <- summary(si)
+  ssi = summary(si)
   avg_widths[i] = ssi$avg.width
 }
 
