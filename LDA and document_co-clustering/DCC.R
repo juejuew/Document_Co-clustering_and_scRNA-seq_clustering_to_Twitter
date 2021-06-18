@@ -17,7 +17,7 @@ library(Matrix)
 #########################################################
 
 # Normalized Mutual Information
-NMI <- function(row_cluster, true_labels, n){
+NMI = function(row_cluster, true_labels, n){
   N_kl = as.matrix(table(row_cluster, true_labels))
   N_k = rowSums(N_kl)
   N_l = colSums(N_kl)
@@ -42,7 +42,7 @@ NMI <- function(row_cluster, true_labels, n){
 }
 
 # Partition generator
-par_gen <- function(n, k, nb_par=1){
+par_gen = function(n, k, nb_par=1){
   
   par = as.integer(sample(as.numeric(1 : k), n, replace = TRUE))
   if (nb_par > 1) {
@@ -55,7 +55,7 @@ par_gen <- function(n, k, nb_par=1){
 }
 
 # TF-IDF data representation
-tf_idf <- function(sparse_mat, l2_norm = FALSE){
+tf_idf = function(sparse_mat, l2_norm = FALSE){
   
   bin_mat = replace(sparse_mat, sparse_mat > 0, 1)
   tfidf_mat = sparse_mat + sparse_mat * log(1 + nrow(sparse_mat)) - t(t(sparse_mat) * log((1 + colSums(bin_mat))))
@@ -72,11 +72,11 @@ tf_idf <- function(sparse_mat, l2_norm = FALSE){
 # License: Apache 2.0 License.
 ##########################################################
 
-dcc_sample <- function(prob){
+dcc_sample = function(prob){
   sample(1 : length(prob), size = 1, replace = FALSE, prob = prob)
 }
 
-dcc <- function(X, k, iter.max=100, stoch_iter.max=70, row_init=NULL, col_init=NULL, n_init=5, tol=1e-6){
+dcc = function(X, k, iter.max=100, stoch_iter.max=70, row_init=NULL, col_init=NULL, n_init=5, tol=1e-6){
   
   # Coherence tests
   
@@ -236,8 +236,8 @@ dcc <- function(X, k, iter.max=100, stoch_iter.max=70, row_init=NULL, col_init=N
   }
   
   ###
-  Run <- do_one(row_c, col_c)
-  best <- Run$ll[Run$iter]
+  Run = do_one(row_c, col_c)
+  best = Run$ll[Run$iter]
   index_best = 1;
   if (n_init >= 2) {
     bool = TRUE
