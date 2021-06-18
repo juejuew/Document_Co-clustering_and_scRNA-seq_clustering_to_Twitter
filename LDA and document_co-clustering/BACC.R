@@ -10,47 +10,47 @@ library(dplyr)
 ### BREGMAN BLOCK AVERAGE CO-CLUSTERING ALGORITHM (BANERJEE ET AL., 2007)
 ###############################################################################
 
-bbac <- function(Z, k, l, W = NULL, distance = "euclidean", scheme = 6, 
+bbac = function(Z, k, l, W = NULL, distance = "euclidean", scheme = 6, 
                  errobj = 1e-6, niters = 100, nruns = 5, epsilon = 1e-8) {
   
-  error <- Inf
-  error_now <- Inf
-  dist <- pmatch(tolower(distance), c("euclidean","divergence")) - 1
+  error = Inf
+  error_now = Inf
+  dist = pmatch(tolower(distance), c("euclidean","divergence")) - 1
   
   for (r in 1:nruns) {
     
     # Initialization of R and C
-    R <- diag(k)[sample(k, dim(Z)[1], replace = TRUE),]
-    C <- diag(l)[sample(l, dim(Z)[2], replace = TRUE),]
+    R = diag(k)[sample(k, dim(Z)[1], replace = TRUE),]
+    C = diag(l)[sample(l, dim(Z)[2], replace = TRUE),]
     
     for (s in 1:niters) {
       
       # Row estimation
-      rs <- get_scheme(dist, scheme, "row", R, Z, C, W, epsilon)
-      ra <- assign_cluster(dist,    Z,    rs$Zrowc,    rs$Zrowv, W, epsilon)
-      R  <- ra$Cluster
+      rs = get_scheme(dist, scheme, "row", R, Z, C, W, epsilon)
+      ra = assign_cluster(dist,    Z,    rs$Zrowc,    rs$Zrowv, W, epsilon)
+      R  = ra$Cluster
       
       # Column estimation
-      cs <- get_scheme(dist, scheme, "col", R, Z, C, W, epsilon)
-      ca <- assign_cluster(dist, t(Z), t(cs$Zcolc), t(cs$Zcolv), W, epsilon)
-      C  <- ca$Cluster
+      cs = get_scheme(dist, scheme, "col", R, Z, C, W, epsilon)
+      ca = assign_cluster(dist, t(Z), t(cs$Zcolc), t(cs$Zcolv), W, epsilon)
+      C  = ca$Cluster
       
       # 
       if (abs(ca$Error - error_now) < errobj) {
-        status <- paste("converged in",s,"iterations")
+        status = paste("converged in",s,"iterations")
         return(list(R = R, C = C, status = status))
       }
       
       # Update objective value
-      error_now <- ca$Error
+      error_now = ca$Error
       
     }
     
     # Keep pair with min error
     if (error_now < error) {
-      R_star <- R
-      C_star <- C
-      error <- error_now
+      R_star = R
+      C_star = C
+      error = error_now
     }
     
   }
