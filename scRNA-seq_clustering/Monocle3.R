@@ -46,8 +46,8 @@ cds = new_cell_data_set(expression_data = word_expression,
                          gene_metadata = word_metadata)
 
 ######## Pre-process ##########
-cds <- preprocess_cds(cds, num_dim = 100)
-cds <- reduce_dimension(cds)
+cds = preprocess_cds(cds, num_dim = 100)
+cds = reduce_dimension(cds)
 
 #####################################
 ############ scree plot #############
@@ -55,11 +55,11 @@ cds <- reduce_dimension(cds)
 
 Monocle3_PCA = cds@int_colData@listData$reducedDims@listData$PCA
 nnn = as.data.frame(Monocle3_PCA)
-vars_transformed <- apply(nnn, 2, var)
+vars_transformed = apply(nnn, 2, var)
 Monocle3_PCA = vars_transformed/sum(vars_transformed)
 Monocle3_PCA = as.numeric(Monocle3_PCA)
 
-PCA <- data.frame(
+PCA = data.frame(
   PCA_components = 1:100,
   Monocle3 = Monocle3_PCA
 )
