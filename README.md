@@ -21,7 +21,7 @@ a pipeline that has a performance comparable to that of the hand-created classif
 automatically and can be applied to general Twitter data sets.
 
 ## Related Links:
-#### The Docker image is also available on dockerhub: https://hub.docker.com/r/juejue64807761/twicluster
+#### The Docker image is available on dockerhub: https://hub.docker.com/r/juejue64807761/twicluster
 ### Topic Modeling algorithms:
 - LDA: https://github.com/deekshakoul/LDA-Topic-modelling
 - Spectral Co-clustering: https://scikit-learn.org/stable/auto_examples/bicluster/plot_bicluster_newsgroups.html#sphx-glr-auto-examples-bicluster-plot-bicluster-newsgroups-py
