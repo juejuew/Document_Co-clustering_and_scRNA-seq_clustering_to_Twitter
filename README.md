@@ -25,7 +25,8 @@ automatically and can be applied to general Twitter data sets.
 ### Topic Modeling algorithms:
 - LDA: https://github.com/deekshakoul/LDA-Topic-modelling
 - Spectral Co-clustering: https://scikit-learn.org/stable/auto_examples/bicluster/plot_bicluster_newsgroups.html#sphx-glr-auto-examples-bicluster-plot-bicluster-newsgroups-py
-- Information Theoretical Co-clustering (ITCC): https://hal.archives-ouvertes.fr/hal-01804528/document
+- Information Theoretical Co-clustering (ITCC): https://github.com/mgorjis/ITCC
+- CROINFO: https://hal.archives-ouvertes.fr/hal-01804528/document
 - Bregman Block Average Co-clustering (BBAC): https://github.com/felipeyanez/bbac
 - Model-Based Co-clustering(LBM): https://cran.r-project.org/web/packages/blockcluster/blockcluster.pdf
 - Directional Co-clustering with a Conscience (DCC): https://github.com/saghiles/dcc
@@ -36,6 +37,8 @@ automatically and can be applied to general Twitter data sets.
 
 # References
 Blei, David M., Andrew Y. Ng, and Michael I. Jordan. "Latent dirichlet allocation." Journal of machine Learning research 3.Jan (2003): 993-1022.
+
+Govaert, Gérard, and Mohamed Nadif. "Mutual information, phi-squared and model-based co-clustering for contingency tables." Advances in Data Analysis and Classification 12.3 (2018): 455-488.
 
 Dhillon, Inderjit S. "Co-clustering documents and words using bipartite spectral graph partitioning." Proceedings of the seventh ACM SIGKDD international conference on Knowledge discovery and data mining. 2001.
 
